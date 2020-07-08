@@ -1,7 +1,6 @@
 const express = require('express');
-const path = require("path");
 const mongoose = require("mongoose");
-const axios = require("axios");
+require("dotenv").config();
 const PORT = process.env.PORT || 3001;
 const routes = require('./routes');
 const app = express();
@@ -11,6 +10,8 @@ const app = express();
 // Middleware 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -18,7 +19,7 @@ if (process.env.NODE_ENV === "production") {
 
 
 //routes
-app.use(routes)
+app.use(routes);
 
 
 // connect to Mongo database
