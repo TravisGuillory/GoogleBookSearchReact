@@ -17,15 +17,14 @@ useEffect(() => {
 }, []);
 
 function handleBookDelete(id)  {
+    console.log(id)
     API.deleteBook(id)
-        .then(response =>{ getBooks()})
+        .then(response => getBooks())
 }
 
 async function getBooks(){
     await API.getBooks()
-        .then(response => setState({ books: response.data}))
-        .then(data => {console.log(data.data)})
-        
+        .then(response => setState({...state,  books: response.data}))
         .catch(err => {
             console.log(err);
     });
@@ -36,32 +35,29 @@ return(
         
         <Container className="">
                 <h2>Saved Volumes</h2>
+                {console.log(state.books)}
         </Container>
             {state.books.length ? (
             <Container className=" text-center">
                 <h3>Current List</h3>
             {state.books.map(book =>(
                 <Card  
-                key={book._id} 
-               
+                    key={book._id} 
                 
-                title={book.title}
-                subtitle={book.subtitle}
-                imgSrc={book.image}
-                authors={book.authors}
-                description={book.description}
-                Button={() => (
-                    <Button
-                      onClick={() => handleBookDelete(book._id)}
-                      className="btn btn-danger"
-                    >
-                      Delete
-                    </Button>
-                )}
+                    
+                    title={book.title}
+                    subtitle={book.subtitle}
+                    imgSrc={book.image}
+                    authors={book.authors}
+                    description={book.description}
+                    btnFunc={() => handleBookDelete(book._id)}
+                    btnText={"Delete"}
+                    viewLink={book.link}
+                    viewBtnText={"View Book"}
                 />
             
             
-
+                
             
             ))}    
              </Container>   

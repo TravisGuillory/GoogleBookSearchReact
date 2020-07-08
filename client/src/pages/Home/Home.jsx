@@ -25,21 +25,20 @@ function handleInputChange(event){
 
 function handleBookSave(id){
     console.log(id)
-    const book = state.books.find(book => book.id ===id);
-    console.log(book)
+    let book = state.books.find(book => book.id ===id);
+    
     API.addBook({
+        image: getImgSrc(book),
         googleId: book.id,
         title: book.volumeInfo.title,
         subtitle: book.volumeInfo.subtitle,
         link: book.volumeInfo.infoLink,
         authors: book.volumeInfo.authors,
         description: book.volumeInfo.description,
-        image: book.volumeInfo.imageLinks.thumbnail
-        (...<Button onclick={() => handleBookSave(book.id)} >
-            Save
-        </Button>) 
+        
+       
     })
-        .then(getBooks());
+        .then(()=> getBooks());
   };
     
 async function getBooks(){
@@ -69,10 +68,13 @@ function handleFormSubmit(event){
     // This function allows for mapping of the state object. 
     // Certain book searches ould result in an error in getting the 
     // the embedded thumbnailimg src. Namely Juurrasic Park.
-    function getImgSrc(bookData) {
+  function getImgSrc(bookData) {
+        
+       
       try {
-        if (bookData.volumeInfo.imageLinks.thumbnail !== undefined) {
-          return bookData.volumeInfo.imageLinks.thumbnail;
+           let img = bookData.volumeInfo.imageLinks.thumbnail;
+        if (img !== undefined) {
+          return img;
         }
       } catch {
         return "";
@@ -108,13 +110,14 @@ function handleFormSubmit(event){
                 </Row>
             </Container>
             {state.books.length ? (
-            <Container className="searchAPI-results ">
+            <Container className="searchAPI-results col-8 align-items-center">
                 <Row >
                     <Col className='justify-content-center'>   
                         <h3>Search Results</h3>
-                        {state.books.map(book =>(
+                        {state.books.map && state.books.map((book, i) =>(
+                             <>
                             <Card  
-                                key={book.id} 
+                                key={i} 
                                 getImgSrc={getImgSrc} 
                                 handleBookSave={()=> handleBookSave(book.id)}
                                 title={book.volumeInfo.title}
@@ -122,12 +125,16 @@ function handleFormSubmit(event){
                                 imgSrc={getImgSrc(book)}
                                 authors={book.volumeInfo.authors}
                                 description={book.volumeInfo.description}
-                                {...<Button onClick={()=> handleBookSave(book.id)}>
-                                    Save Volume
-                                </Button>}
+                                btnFunc={() => {handleBookSave(book.id)}}
+                                btnText={"Save Volume"}
+                                viewLink={book.volumeInfo.previewLink}
+                                viewBtnText={"View Book"}
+                            >
                                 
-                            
-                            />
+                            </Card>
+                           
+                           
+                           </> 
                         ))}
                     </Col>
                 </Row>

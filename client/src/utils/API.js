@@ -3,11 +3,13 @@ import axios from 'axios';
 export default({
     // Save a book
     addBook: function(book){
+        console.log(book)
         return axios.post('/api/books', book);
     },
      // Delete a specific book
-    deleteBook: function(id){
-        return axios.delete('/api/books'+ id);
+    deleteBook: async function(id){
+        console.log(id)
+        return await axios.delete('/api/books/'+id);
     },
     // Get all saved books
     getBooks: function(){

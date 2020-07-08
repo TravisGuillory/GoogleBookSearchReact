@@ -10,7 +10,7 @@ function BookCard (props) {
     <>
      
          <Card  className='p-2 m-2' style={{ width: '20rem' }}>
-            <Image variant="top" src={props.imgSrc}  />
+            <Image className="image-fluid"variant="top" src={props.imgSrc}  />
             <Card.Body >
               <Card.Title>{props.title}</Card.Title>
               <Card.Subtitle>{props.subtitle}</Card.Subtitle>
@@ -18,9 +18,14 @@ function BookCard (props) {
                 <Card.Text>
                   {props.description}
                 </Card.Text>
-
+                <Button className="p-1"ariant={"primary"}onClick={props.btnFunc}>
+                  {props.btnText}
+                </Button>
+                <Button  className="p-1 m-2" variant={"danger"} rel="noreferrer noopener" target="_blank" href={props.viewLink}>
+                  {props.viewBtnText}
+                </Button>
                </Card.Body>
-               <Button/>
+               
          </Card>
        
     
