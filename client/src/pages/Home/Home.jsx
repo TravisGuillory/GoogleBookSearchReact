@@ -111,13 +111,14 @@ function handleFormSubmit(event){
             </Container>
             {state.books.length ? (
             <Container className="searchAPI-results col-8 align-items-center">
-                <Row >
-                    <Col className='justify-content-center'>   
+               
+                      
                         <h3>Search Results</h3>
+                        <Row >  
                         {state.books.map && state.books.map((book, i) =>(
-                             <>
-                            <Card  
-                                key={i} 
+                           <Col> 
+                            <Card   
+                                key={book.id} 
                                 getImgSrc={getImgSrc} 
                                 handleBookSave={()=> handleBookSave(book.id)}
                                 title={book.volumeInfo.title}
@@ -129,16 +130,13 @@ function handleFormSubmit(event){
                                 btnText={"Save Volume"}
                                 viewLink={book.volumeInfo.previewLink}
                                 viewBtnText={"View Book"}
-                            >
-                                
-                            </Card>
-                           
-                           
-                           </> 
+                            />
+                           </Col> 
                         ))}
-                    </Col>
-                </Row>
-            </Container>
+                        </Row>
+             </Container>
+                
+           
             ) : (
             <h2 className="text-center">{state.resultsMessage}</h2>
             )
