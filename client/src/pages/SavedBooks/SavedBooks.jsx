@@ -1,6 +1,6 @@
 import React, {useState, useEffect}from 'react';
 import API from '../../utils/API';
-import {Container, Image, Button  } from 'react-bootstrap';
+import {Container, Button } from 'react-bootstrap';
 import Card from '../../components/Card'
 
 
@@ -42,7 +42,7 @@ return(
                 <h3>Current List</h3>
             {state.books.map(book =>(
                 <Card  
-                key={book.id} 
+                key={book._id} 
                
                 
                 title={book.title}
@@ -50,10 +50,17 @@ return(
                 imgSrc={book.image}
                 authors={book.authors}
                 description={book.description}
-                
-                
+                Button={() => (
+                    <Button
+                      onClick={() => handleBookDelete(book._id)}
+                      className="btn btn-danger"
+                    >
+                      Delete
+                    </Button>
+                )}
+                />
             
-            />
+            
 
             
             ))}    

@@ -1,7 +1,8 @@
 import React, { useState} from 'react';
 import API from '../../utils/API';
-import {Container, Button, Form, Row, Col, Buitton} from 'react-bootstrap';
+import {Container, Button, Form, Row, Col, } from 'react-bootstrap';
 import Card from '../../components/Card';
+import { Link} from 'react-router-dom';
 
 
 
@@ -34,6 +35,9 @@ function handleBookSave(id){
         authors: book.volumeInfo.authors,
         description: book.volumeInfo.description,
         image: book.volumeInfo.imageLinks.thumbnail
+        (...<Button onclick={() => handleBookSave(book.id)} >
+            Save
+        </Button>) 
     })
         .then(getBooks());
   };
@@ -80,27 +84,33 @@ function handleFormSubmit(event){
             
             <Container className="searchAPI-container ">
                 
-            <h3>Search for a Book Volume in Google Books</h3>
-                <Row>
-                    <Col className="col col-12 text-center">
-                    <Form className="p-2 ">
-                        
-                            <Form.Group>
-                                <Form.Label className="font-bold">Enter Book Title</Form.Label>
-                                <Form.Control type="input" name="query" onChange={handleInputChange} placeholder="Enter Book Search Term"></Form.Control>
-                            </Form.Group>
-                        
+           
+                <Row >
+                    <Col className='justify-content-center'  >
+                    <h3>Search for a Book Volume in Google Books</h3>
+                    <Form className="p-2 " >
+                        <Form.Group>
+                            <Form.Label className="font-bold">Enter Book Title</Form.Label>
+                            <Form.Control type="input" name="query" onChange={handleInputChange} placeholder="Enter Book Search Term"></Form.Control>
+                        </Form.Group>
                         <Button variant="outline-success" onClick={handleFormSubmit} type="submit" tabIndex="0">
                             Submit
                         </Button>
                     </Form>
                     </Col>
+                
+                <Col>
+                    <h3>Review Saved Collection</h3>
+                    <Link to='/savedBooks'>
+                        <Button variant="success">Go</Button>
+                    </Link>
+                </Col>
                 </Row>
             </Container>
             {state.books.length ? (
-            <Container className="searchAPI-results">
-                <Row>
-                    <Col>   
+            <Container className="searchAPI-results ">
+                <Row >
+                    <Col className='justify-content-center'>   
                         <h3>Search Results</h3>
                         {state.books.map(book =>(
                             <Card  

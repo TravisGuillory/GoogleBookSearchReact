@@ -18,8 +18,9 @@ function BookCard (props) {
                 <Card.Text>
                   {props.description}
                 </Card.Text>
+
                </Card.Body>
-               
+               <Button/>
          </Card>
        
     
