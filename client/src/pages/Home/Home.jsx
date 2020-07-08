@@ -90,21 +90,21 @@ function handleFormSubmit(event){
                 <Row >
                     <Col className='justify-content-center'  >
                     <h3>Search for a Book Volume in Google Books</h3>
-                    <Form className="p-2 " >
+                    <Form inline className="p-2 " >
                         <Form.Group>
-                            <Form.Label className="font-bold">Enter Book Title</Form.Label>
-                            <Form.Control type="input" name="query" onChange={handleInputChange} placeholder="Enter Book Search Term"></Form.Control>
+                            <Form.Label className="font-bold m-1">Enter Book Title</Form.Label>
+                            <Form.Control type="input" name="query" id="query" onChange={handleInputChange} placeholder="Enter Book Search Term"></Form.Control>
                         </Form.Group>
-                        <Button variant="outline-success" onClick={handleFormSubmit} type="submit" tabIndex="0">
+                        <Button variant="success" onClick={handleFormSubmit} type="submit" className="m-2 p-2" tabIndex="0">
                             Submit
                         </Button>
                     </Form>
                     </Col>
                 
-                <Col>
-                    <h3>Review Saved Collection</h3>
+                <Col >
+                    <h3>Review Saved Collection</h3><br/>
                     <Link to='/savedBooks'>
-                        <Button variant="success">Go</Button>
+                        <Button variant="success" >Go</Button>
                     </Link>
                 </Col>
                 </Row>
